@@ -1,10 +1,11 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { theme } from "@/theme";
 import { useUserStore } from "@/store/userStore";
 import { useRouter } from "expo-router";
 import { PlantlyButton } from "@/components/PlantlyButton";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
+import { PlantlyImage } from "@/components/PlantlyImage";
 
 export default function OnboardingScreen() {
   const router = useRouter();
@@ -25,8 +26,10 @@ export default function OnboardingScreen() {
       ]}
       style={styles.container}
     >
-      <PlantlyButton title="let me in" onPress={handlePress} />
       <StatusBar style="light" />
+      <Text style={styles.heading}>Plantly</Text>
+      <PlantlyImage />
+      <PlantlyButton title="let me in" onPress={handlePress} />
     </LinearGradient>
   );
 }
@@ -37,5 +40,11 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.white,
     alignItems: "center",
     justifyContent: "center",
+  },
+  heading: {
+    fontSize: 40,
+    color: theme.colors.white,
+    fontWeight: "bold",
+    marginBottom: 8,
   },
 });
