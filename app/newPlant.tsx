@@ -4,10 +4,16 @@ import { PlantlyImage } from "@/components/PlantlyImage";
 import { PlantlyButton } from "@/components/PlantlyButton";
 import { useState } from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { usePlantStore } from "@/store/plantsStore";
+import { useRouter } from "expo-router";
 
 export default function NewScreen() {
   const [name, setName] = useState("");
   const [wateringFrequency, setWateringFrequency] = useState("");
+
+  const router = useRouter();
+
+  const addPlant = usePlantStore((state) => state.addPlant);
 
   const handleSubmit = () => {
     if (!name) {
@@ -25,6 +31,8 @@ export default function NewScreen() {
       return;
     }
 
+    addPlant(name, +wateringFrequency);
+    router.navigate("/");
     Alert.alert("Plant added!");
   };
 
