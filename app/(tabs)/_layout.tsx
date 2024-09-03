@@ -1,7 +1,9 @@
-import { Tabs, Redirect } from "expo-router";
+import { Tabs, Redirect, Link } from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { theme } from "@/theme";
 import { useUserStore } from "@/store/userStore";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import { Pressable } from "react-native";
 
 export default function Layout() {
   const hasFinishedOnboarding = useUserStore(
@@ -26,6 +28,24 @@ export default function Layout() {
             <FontAwesome name="leaf" color={color} size={size} />
           ),
           tabBarShowLabel: false,
+          headerRight: () => {
+            return (
+              <Link href="/newPlant" asChild>
+                <Pressable
+                  style={{
+                    marginRight: 20,
+                  }}
+                  hitSlop={20}
+                >
+                  <AntDesign
+                    name="pluscircleo"
+                    size={24}
+                    color={theme.colors.green}
+                  />
+                </Pressable>
+              </Link>
+            );
+          },
         }}
       />
       <Tabs.Screen
