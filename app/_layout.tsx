@@ -21,7 +21,7 @@ export default function Layout() {
         name="newPlant"
         options={{
           presentation: "modal",
-          title: "New plant",
+          title: "New Plant",
         }}
       />
     </Stack>
