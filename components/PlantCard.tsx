@@ -6,7 +6,7 @@ import { theme } from "@/theme";
 export function PlantCard({ plant }: { plant: PlantType }) {
   return (
     <View style={styles.card}>
-      <PlantlyImage size={100} />
+      <PlantlyImage size={100} imageURI={plant.imageURI} />
       <View style={styles.description}>
         <Text style={styles.name}>{plant.name}</Text>
         <Text style={styles.frequency}>

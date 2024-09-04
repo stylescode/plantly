@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, TextInput, Alert } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  TextInput,
+  Alert,
+  TouchableOpacity,
+  Platform,
+} from "react-native";
 import { theme } from "@/theme";
 import { PlantlyImage } from "@/components/PlantlyImage";
 import { PlantlyButton } from "@/components/PlantlyButton";
@@ -6,10 +13,12 @@ import { useState } from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { usePlantStore } from "@/store/plantsStore";
 import { useRouter } from "expo-router";
+import * as ImagePicker from "expo-image-picker";
 
 export default function NewScreen() {
   const [name, setName] = useState("");
   const [wateringFrequency, setWateringFrequency] = useState("");
+  const [imageURI, setImageURI] = useState<string>("");
 
   const router = useRouter();
 
@@ -31,9 +40,26 @@ export default function NewScreen() {
       return;
     }
 
-    addPlant(name, +wateringFrequency);
+    addPlant(name, +wateringFrequency, imageURI);
     router.navigate("/");
     Alert.alert("Plant added!");
+  };
+
+  const handleChooseImage = async () => {
+    if (Platform.OS === "web") {
+      return;
+    }
+
+    const chosenImage = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+
+    if (!chosenImage.canceled) {
+      setImageURI(chosenImage.assets[0].uri);
+    }
   };
 
   return (
@@ -45,9 +71,13 @@ export default function NewScreen() {
       }}
       keyboardShouldPersistTaps="handled"
     >
-      <View>
-        <PlantlyImage />
-      </View>
+      <TouchableOpacity
+        style={styles.imageContainer}
+        activeOpacity={0.7}
+        onPress={handleChooseImage}
+      >
+        <PlantlyImage imageURI={imageURI} />
+      </TouchableOpacity>
       <Text style={styles.text}>Name</Text>
       <TextInput
         style={styles.textInput}
@@ -89,5 +119,8 @@ const styles = StyleSheet.create({
   },
   lastInput: {
     marginBottom: 36,
+  },
+  imageContainer: {
+    marginBottom: 20,
   },
 });
