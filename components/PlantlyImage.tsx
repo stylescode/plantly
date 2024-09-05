@@ -15,10 +15,10 @@ export function PlantlyImage({ size, imageURI }: Props) {
     <Image
       source={imageURI ? { uri: imageURI } : require("@/assets/plantly.png")}
       style={{
-        width: imageSize,
-        height: imageSize,
+        width: imageURI ? imageSize * 0.8 : imageSize,
+        height: imageURI ? imageSize * 0.8 : imageSize,
         borderRadius: 200,
-        marginBottom: imageURI ? 24 : 0,
+        margin: imageURI ? imageSize * 0.1 : 1,
       }}
     />
   );
