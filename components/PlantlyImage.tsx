@@ -18,6 +18,7 @@ export function PlantlyImage({ size, imageURI }: Props) {
         width: imageSize,
         height: imageSize,
         borderRadius: 200,
+        marginBottom: imageURI ? 24 : 0,
       }}
     />
   );
