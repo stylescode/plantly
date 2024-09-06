@@ -1,4 +1,4 @@
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, Platform } from "react-native";
 import { theme } from "@/theme";
 import { useUserStore } from "@/store/userStore";
 import { useRouter } from "expo-router";
@@ -43,9 +43,13 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   heading: {
-    fontSize: 40,
+    fontSize: 56,
     color: theme.colors.white,
     fontWeight: "bold",
-    marginBottom: 8,
+    marginBottom: 2,
+    fontFamily: Platform.select({
+      ios: "NerkoOne-Regular",
+      android: "NerkoOne_400Regular",
+    }),
   },
 });
