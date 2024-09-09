@@ -37,13 +37,17 @@
           ]
         }
       ],
-      ["expo-quick-actions", {
-        "androidIcons": {
-          "leaf": {
-            "foregroundImage": "./assets/quick-actions/leaf.png",
-            "backgroundColor": "#ffffff"}
+      [
+        "expo-quick-actions",
+        {
+          "androidIcons": {
+            "leaf": {
+              "foregroundImage": "./assets/leaf.png",
+              "backgroundColor": "#ffffff"
+            }
+          }
         }
-      }]
+      ]
     ]
   }
 }
