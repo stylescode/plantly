@@ -20,6 +20,14 @@ export default function PlantScreen() {
   const removePlant = usePlantStore((state) => state.removePlant);
 
   useEffect(() => {
+    if (typeof params.plantID === "string") {
+      if (params.action === "water") {
+        waterPlant(params.plantID);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     navigation.setOptions({
       title: `${plant?.name}`,
     });
@@ -54,6 +62,8 @@ export default function PlantScreen() {
       ],
     );
   };
+
+  console.log("plant-id", plant?.id);
 
   return (
     <View style={styles.container}>
